@@ -1,0 +1,458 @@
+from ast import main
+from logging.config import stopListening
+import socket
+import subprocess
+import pyttsx3
+import speech_recognition as sr
+
+import struct 
+import pvporcupine
+import pyaudio
+
+# porcupine=None
+# paud=None
+# audio_stream=None
+
+# try:
+#     access_key="wuBirh3n1fv04/woOgW3ivkPxbOGhLxA47pIuQwXuG0Pkon+SveqSQ==" #to create access key signup to https://console.picovoice.ai/ 
+#     porcupine=pvporcupine.create(keywords=["jarvis","alexa"])
+#     paud=pyaudio.PyAudio()
+#     audio_stream=paud.open(rate=porcupine.sample_rate,channels=1,format=pyaudio.paInt16,input=True,frames_per_buffer=porcupine.frame_length)
+#     while True:
+#         keyword=audio_stream.read(porcupine.frame_length)
+#         keyword=struct.unpack_from("h"*porcupine.frame_length,keyword)
+#         keyword_index=porcupine.process(keyword)
+#         if keyword_index>=0:
+#             print("hotword detected")
+            
+
+# finally:
+#     if porcupine is not None:
+#         porcupine.delete()
+#     if audio_stream is not None:
+#         audio_stream.close()
+#     if paud is not None:
+#         paud.terminate()
+
+
+
+bot_unknown = "Sorry, I could not understand what you said."
+engine=pyttsx3.init('sapi5')
+engine.setProperty("rate",130)
+voices=engine.getProperty('voices')
+#print(voices[1].id)
+engine.setProperty('voice',voices[0].id)
+
+def speak(audio):
+   engine.say(audio)
+   engine.runAndWait()
+
+def internet():
+    try:
+        # connect to the host -- tells us if the host is actually
+        # reachable
+        sock = socket.create_connection(("www.google.com", 80))
+        if sock is not None:
+            #print("Inernet connection is ON!!")
+            sock.close
+            print("Connecting to INTERNET!")
+            speak("Connecting to INTERNET!")
+
+
+    except OSError:
+        pass
+        print("Internet connection unavailable, or slower!! Please connect to a good internet :,(")
+        speak("Internet connection unavailable, or slower!! Please connect to a good internet")
+        exit(0)   
+
+# def check_internet_again():
+#     try:
+#         # connect to the host -- tells us if the host is actually
+#         # reachable
+#         sock = socket.create_connection(("www.google.com", 80))
+#         if sock is not None:
+#             #print("Inernet connection is ON!!")
+#             sock.close
+
+#     except OSError:
+#         pass
+#         print("Internet connection unavailable, or slower!! Please connect to a good internet :,(")
+#         speak("Internet connection unavailable, or slower!! Please connect to a good internet")
+#         str(takecommand()).lower()
+        
+
+print("please wait!!...")
+speak("please wait!!..Checking internet connection")
+internet()
+
+# from itertools import count
+from logging import exception
+# from operator import countOf
+import wikipedia
+import webbrowser
+import os
+import smtplib
+import datetime
+# import pywhatkit
+import maskpass
+import PIL.Image
+import PIL.ImageDraw
+# import face_recognition as fr
+import pickle
+# import cv2
+import numpy as np
+import pyjokes
+import slang
+import random
+import turtle
+import string
+import math
+import urllib3
+from googlesearch import search
+import pyautogui
+from itertools import groupby
+
+
+# def face_detection():
+
+#     path = "C:\\Users\\priya\\AppData\\Local\\pip\\cache\\http\\a\\1\\9\\5\\3\\Python Programs-visual code\\train"
+
+#     known_names = ["Priyansh"]
+#     known_name_encodings = []
+
+#     images = os.listdir(path)
+#     for _ in images:
+#         image = fr.load_image_file(path + _)
+#         image_path = path + _
+#         encoding = fr.face_encodings(image)[0]
+
+#         known_name_encodings.append(encoding)
+
+
+#         known_names.append(os.path.splitext(os.path.basename(image_path))[0].capitalize())
+
+#     test_image = "./test/test.jpg"
+
+#     image = cv2.imread(test_image)
+#     face_locations = fr.face_locations(image)
+
+#     face_encodings = fr.face_encodings(image, face_locations)
+#     for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
+#         matches = fr.compare_faces(known_name_encodings, face_encoding)
+#         name = ""
+
+#     face_distances = fr.face_distance(known_name_encodings, face_encoding)
+#     best_match = np.argmin(face_distances)
+
+#     if matches[best_match]:
+#         name = known_names[best_match]
+
+#     cv2.rectangle(image, (left, top), (right, bottom), (0, 0, 255), 2)
+#     cv2.rectangle(image, (left, bottom - 15), (right, bottom), (0, 0, 255), cv2.FILLED)
+
+#     font = cv2.FONT_HERSHEY_DUPLEX
+#     cv2.putText(image, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
+
+#     cv2.imshow("Result", image)
+#     cv2.imwrite("./output.jpg", image)
+#     cv2.waitKey(0)
+#     cv2.destroyAllWindows()
+
+
+
+def wishMe():
+
+    hour= int(datetime.datetime.now().hour)
+    if hour>=0 and hour<12:
+        speak("Hi, Good morning!")
+
+    elif hour >=12 and hour <18:
+        speak("Hi, Good afternoon!")
+
+    else:
+        speak("Hi, Good Evening!")
+
+    speak('Please tell my partner what she would do?')
+
+def takecommand():
+    #it takes microphone input from the user and returns string output
+
+    r = sr.Recognizer() 
+    with sr.Microphone() as source:
+        print("Listening...")
+        speak("I'm Listening ")
+        r.adjust_for_ambient_noise(source)
+        r.pause_threshold = 1
+        #open pause threshold to change settings!!
+        audio=r.listen(source,timeout=10)
+        #stopListening()
+
+    try:
+        print("Recognizing...")
+        speak("I'm Recognizing,please wait")
+        query=r.recognize_google(audio,language='en-IN')
+        print(f"You said:{query}\n")   
+
+    except Exception as e:
+        print(e)
+        print("I'm sorry :(!! Can you say that again please?")
+        speak("I'm sorry!! Can you say that again please?")
+        
+        return ""
+
+    return query
+
+counter_value = 0
+
+def counter():
+    global counter_value
+    counter_value += 1
+    return counter_value
+
+def passkey():
+
+        speak('Please enter the password: ')
+        password=maskpass.askpass(prompt="Password: ",mask="#")
+        if(password=='hacker'):
+            # face_detection()
+            print('Permission Granted!! :D')
+            speak('Permission granted!!')
+            wishMe()
+        else:
+            c= counter()
+            if(c>=5):
+                speak("̣I got it! you are a threat. keep your criminal hands away from me.")
+                
+            else:
+                speak("̣you entered the wrong password. Try again!")
+            passkey()
+    
+
+
+def open_file(file_to_open):
+    flag=0
+    try:
+   
+        speak(f"you asked to {file_to_open}")
+
+        # search for the file
+        for root, dirs, files in os.walk("C:/"):
+            for file in files:
+                if file_to_open.lower() in file.lower():
+                    file_path = os.path.join(root, file)
+                    print(f"Opening {file_path}")
+                    subprocess.Popen([file_path])
+                    flag=1
+                    break
+                else:
+                    flag=0
+        if (flag==0):
+            speak("cannot not found the file! you could try to open by manual way")
+    except sr.UnknownValueError:
+        speak("Could not understand audio.")
+    except sr.RequestError as e:
+        print("Could not request results; {0}".format(e))
+        speak("Sorry, an error occured")
+
+def conversation():
+    
+    while True:
+        print("In conversation....")
+        user_input=str(takecommand()).lower()
+        try:
+            # handle user input
+            if "hello" in user_input.lower() or "hi" in user_input.lower():
+                speak("Hi there!")
+
+            if "how are you" in user_input.lower():
+                speak("I'm doing well, thank you.")
+
+            if "what is your name" or "who are you" in user_input.lower():
+                speak("My name is Bot.")
+            
+            if "goodbye" in user_input.lower() or "bye" in user_input.lower():
+                speak("Goodbye!")
+                break
+        
+        except exception as e:
+            counter()
+            if counter_value==1:
+                speak("I'm sorry! but i think you will try to flirt. I wont talk. I am calling my boyfried")
+                engine.setProperty('voice',voices[0].id)
+                speak("Dont cross your limit or else i will close AI")
+            if counter_value==2:
+                speak("I am warning you !! i will close AI!!")
+            if counter_value==3:
+                speak("ok this was your 3rd and last try. Dont do it now.")
+
+            if counter_value>3:
+                speak("Enough!!! closing AI in 3.....2......1...!")
+                exit(0)
+
+                
+                
+            
+
+
+if __name__ == "__main__":
+    speak("TURNING ON...!!")
+    speak("I am DEVIL's Artificial inteligence.")
+    passkey()
+
+    while True:
+        engine.setProperty('voice',voices[1].id)
+    # if 1:
+        
+        query = str(takecommand()).lower()
+        #logic..
+        # if("None") in query:
+        #     print("Maybe you didn't gave me command")
+        #     speak("Maybe you didn't gave me command")
+
+        if ('search') in query:
+            
+            query = query.replace("search", "")
+            speak('Searching'+ query + "on google")
+            url = (f"https://www.google.com/search?q={query}")
+            try:
+                # check_internet_again()
+                # 
+                webbrowser.open_new_tab(url)
+            except (wikipedia.exceptions.DisambiguationError or wikipedia.exceptions.PageError) as e:
+                # print(e.options)
+                speak("Sorry, no valid link was found. please ask for another query!")
+
+            except sr.UnknownValueError:
+                speak("Sorry, I didn't understand that.")
+            except sr.RequestError:
+                speak("Sorry, I couldn't reach Google. Please check your internet connection.")
+
+            except exception as e:
+                speak("Sorry, unable to find valid link")
+
+        
+        
+        elif ('what is my name')in query:
+            print('I predict it is you!! Priyansh :D')
+            speak('Well!! I was developed by Preeaansh, and for now, only he uses me often, so i know only one name.')
+            
+        elif'open youtube' in query:
+            speak("opening youtube...")
+            webbrowser.open("https://www.youtube.com/")
+        
+        elif'open google' in query:
+            speak("opening google...")
+            webbrowser.open("www.google.com")
+
+        # elif'play music' in query:
+        # speak("Here is your result...")
+        #     music_dir.='D//...//...'#file location & use // in between.
+
+        elif'youtube music' in query:
+            speak("opening youtube music...")
+            webbrowser.open("https://www.youtube.com/watch?v=fJJmG7CTqRE&list=RDMM&start_radio=1")
+            
+
+        elif 'play' in query:
+            video = query.replace("play", "")
+            speak(f"Playing {video} on YouTube")
+            url = f"https://www.youtube.com/results?search_query={video}"
+            webbrowser.open(url)
+
+        elif'open gmail' in query:
+            speak("opening gmail...")
+            webbrowser.open("https://mail.google.com/mail/u/0/#inbox")
+
+        elif'shutdown pc' in query:
+            speak("Okay sir...!!Shutting down.See you again")
+            os.system("shutdown /s /t 1")
+            
+        elif'restart pc' in query:
+            speak("Okay sir...!!restarting pc")
+            os.system("restart /r /t 1")
+
+        elif('what is the time' or "what's the time" or "time") in query:
+            time=strtime = datetime.datetime.now().strftime("%H:%M:%S")
+            print(time)
+            speak(f"Sir!!,the time is {strtime}")
+
+        elif'open visual studio code' in query:
+            path="C:\\Users\\priya\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            os.startfile(path)
+
+        # elif 'send email'in query:
+        #     try:
+        #         speak("w")
+
+        elif("let's talk") in query:
+            # reply=random.choice('yes','no')
+            # if(reply=="yes"):
+            print(":D")
+            speak('OKAY!! I love talking, like all other females, hahaha!!')
+            conversation()
+            
+        elif 'are you single' in query:
+            reply= speak('NO! I am in a relationship with wifi. hahaha')
+            print(reply)
+            
+        # elif'repeat after me' in query:
+        #s
+
+        elif'tell me a joke' in query:
+            joke=pyjokes.get_joke()
+            print(joke)
+            speak(joke+"hahahaha")
+
+        # elif'start game'in query:
+        #     print("which game you would like to play?")
+        #     speak("which game you would like to play?")
+        #     games=['tik tak toe']
+        #     print(games)
+        #     enter=takecommand().lower()
+        #     if('tik tak toe')in enter:
+        #         tic_tak_toe()
+
+        elif'close'in query:
+            print("Ok sir!! See you again :)")
+            speak("Ok sir!! See you again")
+            exit(0)
+
+        elif'what can you do' in query:
+            speak("hii my friend! For now, i can do only few things like...")
+            print('''If you want to talk, just say "let's talk"\nIf you want to play youtube music, just say"youtube music"\nIf you want to search in wikipedia, just say search (command)\n want to talk?, say"let's talk"\n For jokes,say "tell me a joke"\n Try to ask"are you single?"\nAsk time,say"what's the time"\nTo restart or Shutdown pc,say "restart pc" or "Shutdown pc"\nsay "open google"\n say "open youtube"\nAsk,"What is my name?"\n To exit, say "Close AI"\netc.\n:D ''')
+
+            speak('''If you want to talk, just say "let's talk"\nIf you want to play youtube music, just say"youtube music"\nIf you want to search in wikipedia, just say search (command)\n want to talk?, say"let's talk"\n For jokes,say "tell me a joke"\n Try to ask"are you single?"\nTo Ask time,say"what's the time"\nTo restart or Shutdown pc,say "restart pc" or, "Shutdown pc"\ntry say "open google"\n say "open youtube"\nAsk,"What is my name?"\n To exit, say "Close AI"\n etcectra.''')
+        
+        # elif'open' in query:
+        #     # query = query.replace("open", "")
+        #     # speak('Searching'+ query)
+        #     open_file(query)
+
+
+        # else:
+        #     query = query.replace("search", "")
+        #     speak('Searching'+ query + "on google")
+        #     url = (f"https://www.google.com/search?q={query}")
+        #     try:
+
+        #         webbrowser.open_new(url)
+        #     except (wikipedia.exceptions.DisambiguationError or wikipedia.exceptions.PageError) as e:
+        #         # print(e.options)
+        #         speak("Sorry, no valid link was found. please ask for another query!")
+
+        #     except sr.UnknownValueError:
+        #         speak("Sorry, I didn't understand that.")
+        #     except sr.RequestError:
+        #         speak("Sorry, I couldn't reach Google. Please check your internet connection.")
+
+        #     except exception as e:
+        #         speak("Sorry, unable to find anything")
+
+
+        
+        # elif("") in query:
+        #     query = query.replace("", "")
+        #     result=wikipedia.search(query)
+        #     print(result)
+        #     speak('u said,'+ query+f"here is what i found...{result}\n")
+    

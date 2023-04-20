@@ -1,0 +1,28 @@
+menu1=Label(root,text="Samosa",bg="white").grid(row=0,column=0)
+# menu2=Label(root,text="Ice Cream",bg="white").grid(row=1,column=0)
+# menu3=Label(root,text="Chips",bg="white").grid(row=2,column=0)
+# menu4=Label(root,text="Cold Drink",bg="white").grid(row=3,column=0)
+# menu5=Label(root,text="Chole Bhature",bg="white").grid(row=4,column=0)
+# menu6=Label(root,text="Water",bg="white").grid(row=5,column=0)
+# menu7=Label(root,text="Chowmein",bg="white").grid(row=0,column=49)
+# menu8=Label(root,text="Fried rice",bg="white").grid(row=1,column=49)
+# menu9=Label(root,text="Patiees",bg="white").grid(row=2,column=49)
+# menu10=Label(root,text="Paneer Wrap",bg="white").grid(row=3,column=49)
+# menu11=Label(root,text="Aalu Wrap",bg="white").grid(row=4,column=49)
+# menu12=Label(root,text="Biryani",bg="white").grid(row=5,column=49)
+
+# #check button
+# b1=IntVar
+# #check Button
+# check=Checkbutton().grid(row=0,column=1)
+# check=Checkbutton().grid(row=1,column=1)
+# check=Checkbutton().grid(row=2,column=1)
+# check=Checkbutton().grid(row=3,column=1)
+# check=Checkbutton().grid(row=4,column=1)
+# check=Checkbutton().grid(row=5,column=1)
+# check=Checkbutton().grid(row=0,column=50)
+# check=Checkbutton().grid(row=1,column=50)
+# check=Checkbutton().grid(row=2,column=50)
+# check=Checkbutton().grid(row=3,column=50)
+# check=Checkbutton().grid(row=4,column=50)
+# check=Checkbutton().grid(row=5,column=50)
